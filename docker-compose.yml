@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  mongo:
+    image: mongo:4.4
+    #environment:
+    # MONGO_INITDB_ROOT_USERNAME: root
+    # MONGO_INITDB_ROOT_PASSWORD: root
+    env_file:
+      - .env
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo_data:/data/db
+
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=my_db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+    #docker-compose up -d mongo
+    #docker-compose ps
+    #docker-compose down
